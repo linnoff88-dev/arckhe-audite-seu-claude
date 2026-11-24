@@ -6,13 +6,13 @@
 </div>
 
 
-[![audite-seu-claude](guia/assets/banner.jpg)](https://inematds.github.io/audite-seu-claude/guia/)
+[![audite-seu-claude](guia/assets/banner.jpg)](https://linnoff88-dev.github.io/
 
 **ðŸ‡§ðŸ‡· PortuguÃªs Â· ðŸ‡ºðŸ‡¸ [English](README.en.md) Â· ðŸ‡ªðŸ‡¸ [EspaÃ±ol](README.es.md)**
 
 ## ðŸ“– Guia de uso
 
-Guia completo (landing + passo a passo): **https://inematds.github.io/audite-seu-claude/guia/**
+Guia completo (landing + passo a passo): **https://linnoff88-dev.github.io/
 
 ## O que Ã©
 
@@ -27,7 +27,7 @@ A Anthropic publicou a pÃ¡gina [Prompting Claude Fable 5.2](https://platform.c
 ## ComeÃ§o rÃ¡pido
 
 ```bash
-git clone https://github.com/inematds/audite-seu-claude.git ~/audite-seu-claude
+git clone https://github.com/linnoff88-dev/audite-seu-claude.git ~/audite-seu-claude
 cd ~/meu-projeto
 python3 ~/audite-seu-claude/varrer.py . --home --html relatorio.html --saida-json relatorio.json
 # abra relatorio.html, marque o que aprova, clique em "gerar correcoes.md"
@@ -69,7 +69,7 @@ python3 ~/audite-seu-claude/varrer.py . --home --html relatorio.html --saida-jso
 
 | # | Passo | Comando | Quem |
 |---|---|---|---|
-| 1 | Baixar o kit | `git clone https://github.com/inematds/audite-seu-claude.git ~/audite-seu-claude` | ðŸ§  vocÃª |
+| 1 | Baixar o kit | `git clone https://github.com/linnoff88-dev/audite-seu-claude.git ~/audite-seu-claude` | ðŸ§  vocÃª |
 | 2 | PÃ´r o Fable 5.2 em `high` nas tarefas longas | `/effort high` (ou `--effort high` nos robÃ´s) | ðŸ§  vocÃª |
 | 3 | Auditar | `python3 ~/audite-seu-claude/varrer.py . --home --html relatorio.html --saida-json relatorio.json` | âš™ï¸ script |
 | 4 | Ler o relatÃ³rio e marcar o que aprova | abrir `relatorio.html` â†’ "gerar correcoes.md" e mover o arquivo baixado para a pasta do projeto (ou `varrer.py --correcoes A001,A004 --de relatorio.json --saida correcoes.md`) | ðŸ§  vocÃª |

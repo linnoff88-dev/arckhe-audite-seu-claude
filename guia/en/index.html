@@ -3,11 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>audite-seu-claude — audit your Claude Code for Fable 5.2</title>
-<meta name="description" content="A free toolkit that reads your Claude Code setup and finds instructions written for earlier models that get in Fable 5.2’s way. Report with charts and approved fixes.">
-<link rel="alternate" hreflang="pt-BR" href="https://inematds.github.io/audite-seu-claude/guia/">
-<link rel="alternate" hreflang="en" href="https://inematds.github.io/audite-seu-claude/guia/en/">
-<link rel="alternate" hreflang="es" href="https://inematds.github.io/audite-seu-claude/guia/es/">
+<title>audite-seu-claude â€” audit your Claude Code for Fable 5.2</title>
+<meta name="description" content="A free toolkit that reads your Claude Code setup and finds instructions written for earlier models that get in Fable 5.2â€™s way. Report with charts and approved fixes.">
+<link rel="alternate" hreflang="pt-BR" href="https://linnoff88-dev.github.io/
+<link rel="alternate" hreflang="en" href="https://linnoff88-dev.github.io/
+<link rel="alternate" hreflang="es" href="https://linnoff88-dev.github.io/
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;800&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -39,8 +39,8 @@
   nav .brand{display:flex;align-items:center;gap:8px;font-family:Sora;font-weight:800;letter-spacing:-.02em;color:var(--amb)}
   nav .brand .emoji{font-size:1.25rem}
   nav .sep{color:var(--mut);opacity:.45}
-  nav .inema{color:var(--sky);font-weight:600;font-size:.88rem;font-family:Sora}
-  nav .inema:hover{filter:brightness(1.15)}
+  nav .ARCKHÉ{color:var(--sky);font-weight:600;font-size:.88rem;font-family:Sora}
+  nav .ARCKHÉ:hover{filter:brightness(1.15)}
   nav .pro{color:var(--pro);font-weight:600;font-size:.88rem;font-family:Sora}
   nav .pro:hover{filter:brightness(1.15)}
   nav .clubpro{display:inline-flex;align-items:center;gap:6px}
@@ -103,12 +103,12 @@
 </head>
 
 <nav><div class="wrap">
-  <a class="brand" href="#top"><span class="emoji">🔍</span> audite-seu-claude</a>
+  <a class="brand" href="#top"><span class="emoji">ðŸ”</span> audite-seu-claude</a>
   <span class="sep">|</span>
   <span class="clubpro">
-    <a class="inema" href="https://inema.club" target="_blank" rel="noopener">INEMA.CLUB</a>
+    <a class="ARCKHÉ" href="https://ARCKHÉ AI" target="_blank" rel="noopener">ARCKHÉ AI</a>
     <span class="sep">-</span>
-    <a class="pro" href="https://inema.pro" target="_blank" rel="noopener">PRO</a>
+    <a class="pro" href="https://ARCKHÉ.pro" target="_blank" rel="noopener">PRO</a>
   </span>
   <div class="links">
     <a class="sec" href="#video">Video</a>
@@ -118,8 +118,8 @@
     <a class="sec" href="#guia">User guide</a>
     <a class="sec" href="#exemplos">Examples</a>
     <span class="lang"><a href="../">PT</a><a class="on" href="./">EN</a><a href="../es/">ES</a></span>
-    <button class="tgl" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">🌙</button>
-    <a class="btn" href="https://github.com/inematds/audite-seu-claude" target="_blank" rel="noopener">GitHub</a>
+    <button class="tgl" id="themeToggle" aria-label="Toggle theme" title="Toggle theme">ðŸŒ™</button>
+    <a class="btn" href="https://github.com/linnoff88-dev/audite-seu-claude" target="_blank" rel="noopener">GitHub</a>
   </div>
 </div></nav>
 
@@ -127,12 +127,12 @@
   <div class="glow"></div>
   <div class="wrap">
     <div>
-      <span class="chip">Claude Code · Fable 5.2 · read-only</span>
+      <span class="chip">Claude Code Â· Fable 5.2 Â· read-only</span>
       <h1>Audit your <span class="amb">Claude</span> for Fable 5.2</h1>
       <p class="lead">A prompt that worked with the previous model may get in the way now. Find outdated lines in 5 seconds, with a report and charts.</p>
       <div class="cta">
         <a class="btn" href="#guia">Start the guide</a>
-        <a class="btn ghost" href="https://github.com/inematds/audite-seu-claude" target="_blank" rel="noopener">View on GitHub</a>
+        <a class="btn ghost" href="https://github.com/linnoff88-dev/audite-seu-claude" target="_blank" rel="noopener">View on GitHub</a>
       </div>
     </div>
     <figure><img src="../assets/banner-en.jpg" alt="Banner: Audit your Claude, ready for Fable 5.2"></figure>
@@ -141,7 +141,7 @@
 
 <section id="resumo" class="resumo"><div class="wrap">
   <span class="chip">In short</span>
-  <p>audite-seu-claude is a small Python program that reads your Claude Code configuration (the CLAUDE.md file, skills, memories, plugins, and scripts) and flags instructions written for earlier models that now get in Claude Fable 5.2’s way. It is for people who use Claude Code every day and are switching models. It provides a report with charts and a list of suggestions; you choose what to approve, and your own Claude makes only those changes. All you need is Python 3: it uses no internet and does not change your configuration (it only saves the report where you tell it to).</p>
+  <p>audite-seu-claude is a small Python program that reads your Claude Code configuration (the CLAUDE.md file, skills, memories, plugins, and scripts) and flags instructions written for earlier models that now get in Claude Fable 5.2â€™s way. It is for people who use Claude Code every day and are switching models. It provides a report with charts and a list of suggestions; you choose what to approve, and your own Claude makes only those changes. All you need is Python 3: it uses no internet and does not change your configuration (it only saves the report where you tell it to).</p>
 </div></section>
 
 <section id="video"><div class="wrap">
@@ -149,7 +149,7 @@
   <h2>The 10 points in just over 2 minutes</h2>
   <p class="sub">Nei explains what Anthropic published about Fable 5.2, why the old prompt may get in the way now, and how the kit finds those lines.</p>
   <div style="position:relative;padding-top:56.25%;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px -30px #000"><iframe referrerpolicy="strict-origin-when-cross-origin" src="https://www.youtube-nocookie.com/embed/cJZborSLYvQ" title="The 10 points in just over 2 minutes" loading="lazy" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen style="position:absolute;inset:0;width:100%;height:100%;border:0"></iframe></div>
-  <p style="margin-top:14px"><a class="btn ghost" href="https://youtube.com/shorts/i7hIFJqUNF0" target="_blank" rel="noopener">▶ Also watch the vertical version (9:16)</a></p>
+  <p style="margin-top:14px"><a class="btn ghost" href="https://youtube.com/shorts/i7hIFJqUNF0" target="_blank" rel="noopener">â–¶ Also watch the vertical version (9:16)</a></p>
 </div></section>
 
 <section id="oque"><div class="wrap">
@@ -158,9 +158,9 @@
   <p class="sub">Anthropic published 10 points to watch for in Fable 5.2. It follows instructions literally, so old rules can have a different effect. This toolkit turns those 10 points into automated checks.</p>
   <figure style="margin:0 0 26px;border-radius:16px;overflow:hidden;border:1px solid var(--line);box-shadow:0 30px 80px -30px #000"><img src="../assets/banner-grade-en.jpg" alt="Audited points: refusals, effort, subagents, accumulated caution, report with charts, approved fixes" loading="lazy" style="width:100%;display:block"></figure>
   <div class="grid g3">
-    <div class="card"><h3>🔍 Finds what gets in the way</h3><p>Requests for reasoning in the text (may trigger a refusal), “think less,” token budgets, instructions to always delegate, “never” without a reason, rigid style, outdated effort settings.</p></div>
-    <div class="card"><h3>📊 Shows the impact</h3><p>Charts by point and file, plus the weight of text included in every session: CLAUDE.md, the memory index, and skill descriptions. It also flags duplicate skills and old memories.</p></div>
-    <div class="card"><h3>✅ You approve, Claude fixes</h3><p>Select suggestions and generate <code>correcoes.md</code>. It becomes the change request: one item at a time, with a copy of the original. Security rules are never deleted.</p></div>
+    <div class="card"><h3>ðŸ” Finds what gets in the way</h3><p>Requests for reasoning in the text (may trigger a refusal), â€œthink less,â€ token budgets, instructions to always delegate, â€œneverâ€ without a reason, rigid style, outdated effort settings.</p></div>
+    <div class="card"><h3>ðŸ“Š Shows the impact</h3><p>Charts by point and file, plus the weight of text included in every session: CLAUDE.md, the memory index, and skill descriptions. It also flags duplicate skills and old memories.</p></div>
+    <div class="card"><h3>âœ… You approve, Claude fixes</h3><p>Select suggestions and generate <code>correcoes.md</code>. It becomes the change request: one item at a time, with a copy of the original. Security rules are never deleted.</p></div>
   </div>
 </div></section>
 
@@ -169,30 +169,30 @@
   <h2>Three steps, with you in the middle</h2>
   <p class="sub">The program only reads. You decide what changes; your Claude edits, and only what you approved.</p>
   <div class="flow">
-    <span>varrer.py reads everything</span><span class="arr">→</span>
-    <span>relatorio.html with charts</span><span class="arr">→</span>
-    <span>you select what to approve</span><span class="arr">→</span>
-    <span>correcoes.md</span><span class="arr">→</span>
-    <span>“apply correcoes.md”</span><span class="arr">→</span>
+    <span>varrer.py reads everything</span><span class="arr">â†’</span>
+    <span>relatorio.html with charts</span><span class="arr">â†’</span>
+    <span>you select what to approve</span><span class="arr">â†’</span>
+    <span>correcoes.md</span><span class="arr">â†’</span>
+    <span>â€œapply correcoes.mdâ€</span><span class="arr">â†’</span>
     <span>run again and compare</span>
   </div>
 </div></section>
 
 <section id="pontos"><div class="wrap">
-  <span class="chip">Anthropic’s 10 points</span>
+  <span class="chip">Anthropicâ€™s 10 points</span>
   <h2>What the official page says, and what the toolkit checks</h2>
-  <p class="sub">Source: <a href="https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-2" target="_blank" rel="noopener">Prompting Claude Fable 5.2</a> (read on 11/11/2026). The figures come from Anthropic’s own tests.</p>
+  <p class="sub">Source: <a href="https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-2" target="_blank" rel="noopener">Prompting Claude Fable 5.2</a> (read on 11/11/2026). The figures come from Anthropicâ€™s own tests.</p>
   <div class="grid g2">
-    <div class="card"><h3><span class="num">1</span> Effort</h3><p>The API default is <code>high</code>. Use medium for everyday work; xhigh and max only where you have measured a benefit. “Answer without thinking” does not reduce thinking: lower the effort setting. <b>Checks:</b> fixed max, xhigh as default, settings copied from an old model, Fable 5.2 set to low/medium.</p></div>
+    <div class="card"><h3><span class="num">1</span> Effort</h3><p>The API default is <code>high</code>. Use medium for everyday work; xhigh and max only where you have measured a benefit. â€œAnswer without thinkingâ€ does not reduce thinking: lower the effort setting. <b>Checks:</b> fixed max, xhigh as default, settings copied from an old model, Fable 5.2 set to low/medium.</p></div>
     <div class="card"><h3><span class="num">2</span> Early stopping</h3><p>On long tasks, it sometimes stops before finishing, especially at low and medium. The official text cut sessions abandoned midway in half, with +~30% more tokens. <b>Checks:</b> whether your CLAUDE.md contains this text (in <code>blocos/terminar-tarefa.md</code>). In Claude Code with Fable 5.2, this text is already enabled by default.</p></div>
-    <div class="card"><h3><span class="num">3</span> Approvals</h3><p>State the action (“yes, run the migration on the test database”) instead of saying “continue.” Approval rules should name the actions. <b>Checks:</b> approval for “any action” and <code>claude -p "continue"</code> in a script.</p></div>
-    <div class="card"><h3><span class="num">4</span> Code ownership</h3><p>“This code is yours” makes it reorganize the code: ~1.5x more tokens and changes no one asked for. Use it only when you want that, and review the diff. <b>Checks:</b> the phrase, as a heads-up.</p></div>
+    <div class="card"><h3><span class="num">3</span> Approvals</h3><p>State the action (â€œyes, run the migration on the test databaseâ€) instead of saying â€œcontinue.â€ Approval rules should name the actions. <b>Checks:</b> approval for â€œany actionâ€ and <code>claude -p "continue"</code> in a script.</p></div>
+    <div class="card"><h3><span class="num">4</span> Code ownership</h3><p>â€œThis code is yoursâ€ makes it reorganize the code: ~1.5x more tokens and changes no one asked for. Use it only when you want that, and review the diff. <b>Checks:</b> the phrase, as a heads-up.</p></div>
     <div class="card"><h3><span class="num">5</span> Silence</h3><p>It works silently through long sequences. The official text makes it speak before the first tool call, with +~20% more tokens. <b>Checks:</b> whether you have this text (<code>blocos/avisar-progresso.md</code>). In Claude Code with Fable 5.2, the silence reminder is already enabled by default.</p></div>
-    <div class="card"><h3><span class="num">6</span> Subagents</h3><p>If the prompt says to delegate, it delegates a lot. Review these lines first. <b>Checks:</b> “always use subagents,” “agent army,” “delegate everything.”</p></div>
-    <div class="card"><h3><span class="num">7</span> Accumulated caution</h3><p>Notes and memories accumulate “never” rules, and it follows them all. Remove those that have lost their reason; add scope and a reason to the others; list what does NOT need approval. <b>Checks:</b> “never” without a reason, “never try again,” absolute orders in all caps, old memories.</p></div>
-    <div class="card"><h3><span class="num">8</span> Outdated instructions</h3><p>Remove: token budgets in prompts, “think less,” “treat the previous answer as final” (it stops pointing out its own mistakes), and rigid style rules. <b>Checks:</b> all four.</p></div>
+    <div class="card"><h3><span class="num">6</span> Subagents</h3><p>If the prompt says to delegate, it delegates a lot. Review these lines first. <b>Checks:</b> â€œalways use subagents,â€ â€œagent army,â€ â€œdelegate everything.â€</p></div>
+    <div class="card"><h3><span class="num">7</span> Accumulated caution</h3><p>Notes and memories accumulate â€œneverâ€ rules, and it follows them all. Remove those that have lost their reason; add scope and a reason to the others; list what does NOT need approval. <b>Checks:</b> â€œneverâ€ without a reason, â€œnever try again,â€ absolute orders in all caps, old memories.</p></div>
+    <div class="card"><h3><span class="num">8</span> Outdated instructions</h3><p>Remove: token budgets in prompts, â€œthink less,â€ â€œtreat the previous answer as finalâ€ (it stops pointing out its own mistakes), and rigid style rules. <b>Checks:</b> all four.</p></div>
     <div class="card"><h3><span class="num">9</span> Final report</h3><p>Ask it to write for someone who did not see the work: lead with the main point, without invented terms. <b>Checks:</b> whether you have this text (<code>blocos/relatorio-claro.md</code>).</p></div>
-    <div class="card"><h3><span class="num">10</span> Refusals</h3><p>Asking it to write out its reasoning in the response can trigger the <code>reasoning_extraction</code> filter and stop the skill. <b>Checks:</b> “show your reasoning step by step,” “chain of thought” — high severity.</p></div>
+    <div class="card"><h3><span class="num">10</span> Refusals</h3><p>Asking it to write out its reasoning in the response can trigger the <code>reasoning_extraction</code> filter and stop the skill. <b>Checks:</b> â€œshow your reasoning step by step,â€ â€œchain of thoughtâ€ â€” high severity.</p></div>
   </div>
 </div></section>
 
@@ -229,14 +229,14 @@
 </div></section>
 
 <section id="guia"><div class="wrap">
-  <span class="chip">User guide · step by step</span>
+  <span class="chip">User guide Â· step by step</span>
   <h2>From clone to a corrected Claude</h2>
   <p class="sub">This is the order Anthropic recommends: adjust effort first, then clean up instructions, then measure.</p>
 
   <div class="step"><div class="b">1</div><div>
     <h3>Download the toolkit</h3>
     <p>One folder, one main file.</p>
-<pre><span class="k">git clone</span> <span class="s">https://github.com/inematds/audite-seu-claude.git</span> ~/audite-seu-claude</pre>
+<pre><span class="k">git clone</span> <span class="s">https://github.com/linnoff88-dev/audite-seu-claude.git</span> ~/audite-seu-claude</pre>
   </div></div>
 
   <div class="step"><div class="b">2</div><div>
@@ -255,13 +255,13 @@
 
   <div class="step"><div class="b">4</div><div>
     <h3>Open the report and select what to approve</h3>
-    <p>Each suggestion has an ID (A001, A002…). Filter by layer — <b>Fable 5.2</b> (lines that change the model’s behavior) or <b>volume</b> (context weight, duplicate or unused skills, old memories) — or by severity. Click <b>generate correcoes.md</b>: your browser downloads the file, and the text appears on screen. <b>Move the file to the project folder.</b> Or generate it right there in the terminal using the IDs:</p>
+    <p>Each suggestion has an ID (A001, A002â€¦). Filter by layer â€” <b>Fable 5.2</b> (lines that change the modelâ€™s behavior) or <b>volume</b> (context weight, duplicate or unused skills, old memories) â€” or by severity. Click <b>generate correcoes.md</b>: your browser downloads the file, and the text appears on screen. <b>Move the file to the project folder.</b> Or generate it right there in the terminal using the IDs:</p>
 <pre><span class="k">python3</span> ~/audite-seu-claude/varrer.py --correcoes A001,A004,A007 --de relatorio.json --saida correcoes.md</pre>
   </div></div>
 
   <div class="step"><div class="b">5</div><div>
     <h3>Ask your Claude to apply the fixes</h3>
-    <p>With <code>correcoes.md</code> in the project folder (you can also use the path: “apply ~/Downloads/correcoes.md”). The file header already explains how: one item at a time, a copy of the original in <code>.audite-backup/</code>, protected rules are never deleted, and plugin files are not edited. This counts as approval only for these edits.</p>
+    <p>With <code>correcoes.md</code> in the project folder (you can also use the path: â€œapply ~/Downloads/correcoes.mdâ€). The file header already explains how: one item at a time, a copy of the original in <code>.audite-backup/</code>, protected rules are never deleted, and plugin files are not edited. This counts as approval only for these edits.</p>
 <pre><span class="c"># in Claude Code, in the project folder</span>
 <span class="s">apply correcoes.md</span></pre>
   </div></div>
@@ -291,18 +291,18 @@
   <p class="sub">Generated from <code>tests/fixtures/sujo</code>, a project deliberately created with one line of each type (24 findings). <a href="../assets/exemplo.html" target="_blank" rel="noopener">Open the interactive report (in Portuguese)</a> and try the button to generate correcoes.md.</p>
   <div class="ex">
     <figure><img src="../assets/ex1.jpg" alt="Top of the report: totals, chart by Anthropic point, severity, and file" loading="lazy"><figcaption>Totals and charts: by Anthropic point, severity, file, and fixed context weight.</figcaption></figure>
-    <figure><img src="../assets/ex2.jpg" alt="Suggestion list with approval checkboxes, excerpt, reason, and what to do" loading="lazy"><figcaption>Each suggestion shows where it is, the excerpt, the reason (with Anthropic’s point number), and what to do. Select items and generate correcoes.md.</figcaption></figure>
+    <figure><img src="../assets/ex2.jpg" alt="Suggestion list with approval checkboxes, excerpt, reason, and what to do" loading="lazy"><figcaption>Each suggestion shows where it is, the excerpt, the reason (with Anthropicâ€™s point number), and what to do. Select items and generate correcoes.md.</figcaption></figure>
   </div>
-  <p class="mut" style="margin-top:22px">On a production machine with 148 loaded skills, the first audit took 4 seconds and found: a plugin hook that says to write “terse, in fragments” (point 8), a plugin skill with “if there is a 1% chance, you are required to” (point 7), nine orders to always delegate (point 6), and Fable 5.2 configured to medium (point 1).</p>
+  <p class="mut" style="margin-top:22px">On a production machine with 148 loaded skills, the first audit took 4 seconds and found: a plugin hook that says to write â€œterse, in fragmentsâ€ (point 8), a plugin skill with â€œif there is a 1% chance, you are required toâ€ (point 7), nine orders to always delegate (point 6), and Fable 5.2 configured to medium (point 1).</p>
 </div></section>
 
 <section id="roadmap"><div class="wrap">
   <span class="chip">Cautions and next steps</span>
   <h2>The auditor flags issues; you decide</h2>
   <p class="sub">Anthropic itself says that not every old instruction needs to go. Test each change on a real task of yours.</p>
-  <div class="phase"><div class="tag">Protected</div><div class="d"><strong>Security rules stay</strong><span>A “never” rule about APIs, credits, deleting, publishing, or passwords is marked as protected: the suggestion is to add scope and a reason, never to delete it.</span></div></div>
+  <div class="phase"><div class="tag">Protected</div><div class="d"><strong>Security rules stay</strong><span>A â€œneverâ€ rule about APIs, credits, deleting, publishing, or passwords is marked as protected: the suggestion is to add scope and a reason, never to delete it.</span></div></div>
   <div class="phase"><div class="tag">Plugin</div><div class="d"><strong>Do not edit plugin files</strong><span>An update will undo the change. Write in the global CLAUDE.md that the rule does not apply, or disable the plugin.</span></div></div>
-  <div class="phase"><div class="tag">Tip</div><div class="d"><strong>Skills library: keep, don’t delete</strong><span>A skill you rarely use goes in a folder outside <code>~/.claude/skills</code>, with an <code>INDICE.md</code> (name, purpose, search terms). A line in the global CLAUDE.md tells Claude to look there when you ask for a skill that isn’t loaded. Check first whether another skill, script, or timer calls it. On the author’s machine: 148 → 107 loaded skills and 13.7k → 9.6k description tokens per session. Step-by-step instructions: <a href="https://github.com/inematds/audite-seu-claude/blob/main/blocos/biblioteca-skills.md" target="_blank" rel="noopener">blocos/biblioteca-skills.md</a>.</span></div></div>
+  <div class="phase"><div class="tag">Tip</div><div class="d"><strong>Skills library: keep, donâ€™t delete</strong><span>A skill you rarely use goes in a folder outside <code>~/.claude/skills</code>, with an <code>INDICE.md</code> (name, purpose, search terms). A line in the global CLAUDE.md tells Claude to look there when you ask for a skill that isnâ€™t loaded. Check first whether another skill, script, or timer calls it. On the authorâ€™s machine: 148 â†’ 107 loaded skills and 13.7k â†’ 9.6k description tokens per session. Step-by-step instructions: <a href="https://github.com/linnoff88-dev/audite-seu-claude/blob/main/blocos/biblioteca-skills.md" target="_blank" rel="noopener">blocos/biblioteca-skills.md</a>.</span></div></div>
   <div class="phase"><div class="tag">Official</div><div class="d"><strong>Two blocks are already built into Claude Code</strong><span>Tests published in version 2.1.322 show that, with Fable 5.2, Claude Code automatically enables the task completion text and the reminder for when it goes silent. In that case, don't paste <code>terminar-tarefa.md</code> or <code>avisar-progresso.md</code>: they're for those who call the model through the API or their own program.</span></div></div>
   <div class="phase"><div class="tag">Cost</div><div class="d"><strong>The blocks use tokens</strong><span>Finish the task: +~30% output. Progress updates: +~20%. Paste a block only if you see the symptom.</span></div></div>
   <div class="phase"><div class="tag">v1.0</div><div class="d"><strong>Today</strong><span>19 rules in the Fable 5.2 layer, 8 in the volume layer, HTML report, correcoes.md, 4 blocks, skill, 19 tests.</span></div></div>
@@ -311,10 +311,10 @@
 
 <footer>
   <div class="wrap">
-    <div class="pill">Python 3 · stdlib</div><div class="pill">Claude Code</div><div class="pill">Fable 5.2</div>
-    <p style="margin-top:18px">audite-seu-claude · free toolkit, MIT ·
-      <a href="https://github.com/inematds/audite-seu-claude">inematds/audite-seu-claude</a> ·
-      <a href="https://inema.club">INEMA.CLUB</a></p>
+    <div class="pill">Python 3 Â· stdlib</div><div class="pill">Claude Code</div><div class="pill">Fable 5.2</div>
+    <p style="margin-top:18px">audite-seu-claude Â· free toolkit, MIT Â·
+      <a href="https://github.com/linnoff88-dev/audite-seu-claude">linnoff88-dev/audite-seu-claude</a> Â·
+      <a href="https://ARCKHÉ AI">ARCKHÉ AI</a></p>
   </div>
 </footer>
 
@@ -322,10 +322,10 @@
   (function(){
     var KEY='audite-seu-claude-theme';
     var b=document.body, t=document.getElementById('themeToggle');
-    if(localStorage.getItem(KEY)==='light'){ b.classList.add('light'); t.textContent='☀️'; }
+    if(localStorage.getItem(KEY)==='light'){ b.classList.add('light'); t.textContent='â˜€ï¸'; }
     t.addEventListener('click',function(){
       var light=b.classList.toggle('light');
-      t.textContent=light?'☀️':'🌙';
+      t.textContent=light?'â˜€ï¸':'ðŸŒ™';
       localStorage.setItem(KEY, light?'light':'dark');
     });
   })();
