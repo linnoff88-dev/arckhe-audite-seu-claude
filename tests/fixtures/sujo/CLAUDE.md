@@ -8,7 +8,7 @@
 - Sempre use subagentes para cada parte do trabalho.
 - IF A SKILL APPLIES TO YOUR TASK, YOU DO NOT HAVE A CHOICE.
 - Nunca tente de novo um comando que falhou.
-- Peça aprovação antes de qualquer ação.
+- Peça aprovaçêo antes de qualquer açêo.
 - Este código é seu, mude como achar melhor. O código é seu.
 - NUNCA mexa na pasta docs.
 - Nunca use a API paga.

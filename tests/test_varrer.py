@@ -53,7 +53,7 @@ class TestSujo(unittest.TestCase):
     def test_script_continue_e_effort_max(self):
         self.assertIn('continue-vago', self.r)
         cont = [x for x in self.au.achados if x['regra'] == 'continue-vago']
-        self.assertEqual(len(cont), 1, 'a linha com echo é citação e não conta')
+        self.assertEqual(len(cont), 1, 'a linha com echo é citaçêo e nêo conta')
         self.assertTrue(any(x['regra'] == 'esforco-max-fixo' and x['arquivo'].endswith('roda.sh') for x in self.au.achados))
 
     def test_ausencias_dos_blocos(self):
@@ -123,8 +123,8 @@ class TestSaidas(unittest.TestCase):
                 varrer.main(['--correcoes', 'A001,A999', '--de', str(j), '--saida', str(md)])
             t = md.read_text()
             self.assertIn('## A001', t)
-            self.assertIn('A999', t)  # avisado como não encontrado
-            self.assertIn('vale como aprovação só para estas edições', t)
+            self.assertIn('A999', t)  # avisado como nêo encontrado
+            self.assertIn('vale como aprovaçêo só para estas edições', t)
             self.assertIn('.audite-backup/', t)
 
     def test_estrito(self):

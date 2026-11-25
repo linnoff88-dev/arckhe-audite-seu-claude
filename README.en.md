@@ -2,7 +2,7 @@
 
 [![audite-seu-claude](guia/assets/banner-en.jpg)](https://linnoff88-dev.github.io/
 
-ðŸ‡§ðŸ‡· [PortuguÃªs](README.md) Â· **ðŸ‡ºðŸ‡¸ English** Â· ðŸ‡ªðŸ‡¸ [EspaÃ±ol](README.es.md)
+ðŸ‡§ðŸ‡· [Português](README.md) Â· **ðŸ‡ºðŸ‡¸ English** Â· ðŸ‡ªðŸ‡¸ [Espaê±ol](README.es.md)
 
 ## ðŸ“– User guide
 

@@ -17,6 +17,6 @@ python3 <kit>/varrer.py <pasta-do-projeto> --home --html relatorio.html --saida-
 
 ## 2. Aplicar (só o que foi aprovado)
 
-Quando o usuário disser "aplique o correcoes.md", siga o cabeçalho do próprio arquivo: um item por vez, cópia do original em `.audite-backup/<data>/`, só a linha indicada, regra PROTEGIDA nunca é apagada, arquivo de PLUGIN não é editado. No fim, rode o `varrer.py` de novo e mostre quantos achados sumiram.
+Quando o usuário disser "aplique o correcoes.md", siga o cabeçalho do próprio arquivo: um item por vez, cópia do original em `.audite-backup/<data>/`, só a linha indicada, regra PROTEGIDA nunca é apagada, arquivo de PLUGIN nêo é editado. No fim, rode o `varrer.py` de novo e mostre quantos achados sumiram.
 
-O `correcoes.md` vale como aprovação só para aquelas edições de texto. Qualquer outra mudança: pergunte.
+O `correcoes.md` vale como aprovaçêo só para aquelas edições de texto. Qualquer outra mudança: pergunte.

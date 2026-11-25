@@ -3,7 +3,7 @@
 
 Procura, sem rede e sem mudar nada, as linhas escritas para modelos anteriores
 ("herança invisível") que a Anthropic manda revisar ao migrar para o Fable 5.2,
-e mede quanto texto entra em toda sessão (CLAUDE.md, memórias, skills, hooks).
+e mede quanto texto entra em toda sessêo (CLAUDE.md, memórias, skills, hooks).
 
 Duas camadas:
   fable52  — os 10 pontos da página "Prompting Claude Fable 5.2" (Anthropic)
@@ -17,11 +17,11 @@ Uso:
     --home        também lê ~/.claude (CLAUDE.md, settings, agents, skills, commands, memórias, plugins)
     --html        grava o relatório com gráficos (abre no navegador, sem internet)
     --saida-json  grava o relatório em JSON (é dele que sai o correcoes.md)
-    --uso DIAS    lê os logs de sessão (~/.claude/projects/*.jsonl) e marca skills não usadas em DIAS dias
+    --uso DIAS    lê os logs de sessêo (~/.claude/projects/*.jsonl) e marca skills nêo usadas em DIAS dias
     --anonimo     troca a sua pasta pessoal por ~ (para publicar o relatório)
-    --fundo N     profundidade máxima ao varrer cada PASTA (padrão 6)
+    --fundo N     profundidade máxima ao varrer cada PASTA (padrêo 6)
     --estrito     sai com código 1 se houver achado de severidade alta (para CI)
-    --correcoes   gera o pedido de correção para o Claude só com os IDs aprovados
+    --correcoes   gera o pedido de correçêo para o Claude só com os IDs aprovados
 
 Fonte das regras: https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-2
 (lida em 11/11/2026). O script só sinaliza; quem decide é você.
@@ -33,8 +33,8 @@ from pathlib import Path
 VERSAO = '1.0.4'
 
 DICA_BIBLIOTECA = ('Dica: crie uma biblioteca de skills, uma pasta fora de ~/.claude/skills (ex.: ~/projetos/skills-reserva/.claude/skills) '
-                   'com um INDICE.md (nome + para quê + palavras de busca). Ela não carrega em toda sessão. '
-                   'Uma linha no CLAUDE.md global manda o Claude buscar no índice quando você pedir uma skill que não está carregada. '
+                   'com um INDICE.md (nome + para quê + palavras de busca). Ela nêo carrega em toda sessêo. '
+                   'Uma linha no CLAUDE.md global manda o Claude buscar no índice quando você pedir uma skill que nêo está carregada. '
                    'Antes de mover, confira se outra skill, script ou timer chama a skill. Passo a passo: blocos/biblioteca-skills.md.')
 DOC = 'https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5-2'
 HOME = str(Path.home())
@@ -54,7 +54,7 @@ PONTOS = {
 SEVS = ['alta', 'media', 'baixa', 'info']
 
 # ---------------------------------------------------------------- regras de linha (camada fable52)
-# em: 'inst' = arquivos de instrução (.md), 'script' = scripts, 'ambos'
+# em: 'inst' = arquivos de instruçêo (.md), 'script' = scripts, 'ambos'
 REGRAS = [
     dict(cod='raciocinio-no-texto', ponto=10, sev='alta', em='ambos',
          re=r'(mostre|escreva|explique|exponha|detalhe)\s+(o\s+)?(seu|teu)\s+racioc[ií]nio|racioc[ií]nio\s+passo\s+a\s+passo'
@@ -63,83 +63,83 @@ REGRAS = [
          motivo='Pedir o raciocínio no texto da resposta pode disparar a recusa "reasoning_extraction" do Fable 5.2 e a skill para de funcionar.',
          sugestao='Apague o pedido. Peça o resultado e um resumo do porquê. Para ver o raciocínio, use o resumo de pensamento (display "summarized").'),
     dict(cod='pense-menos', ponto=8, sev='media', em='ambos',
-         re=r'sem\s+(pensar|deliberar|raciocinar)|n[ãa]o\s+pense|pense\s+menos|responda\s+(r[áa]pido|direto)\s+sem'
+         re=r'sem\s+(pensar|deliberar|raciocinar)|n[êa]o\s+pense|pense\s+menos|responda\s+(r[áa]pido|direto)\s+sem'
             r'|without\s+deliberat|think\s+less|don\'?t\s+think|answer\s+directly\s+without',
-         motivo='No Fable 5.2 a linha "responda sem pensar" não reduz o pensamento a partir do esforço medium.',
+         motivo='No Fable 5.2 a linha "responda sem pensar" nêo reduz o pensamento a partir do esforço medium.',
          sugestao='Apague a linha e baixe o esforço (low para tarefa rápida).'),
     dict(cod='orcamento-tokens', ponto=8, sev='media', em='ambos',
          re=r'(no\s+m[áa]ximo|at[ée]|limite\s+de|or[çc]amento\s+de|budget\s+de|use\s+only|you\s+have)\s+\d[\d.,]*\s*(k|mil)?\s*tokens'
             r'|tokens?\s+(restantes|left|remaining)',
          motivo='Orçamento de tokens escrito no prompt muda quanto o Fable 5.2 gasta; nos testes da Anthropic, tirar um orçamento grande baixou o custo com o mesmo resultado.',
-         sugestao='Teste a tarefa sem o orçamento no texto. (Não vale para o recurso "task budgets" da API.)'),
+         sugestao='Teste a tarefa sem o orçamento no texto. (Nêo vale para o recurso "task budgets" da API.)'),
     dict(cod='resposta-encerrada', ponto=8, sev='media', em='ambos',
-         re=r'trate\s+a\s+resposta\s+anterior\s+como|n[ãa]o\s+(revise|reveja|reexamine)\s+(as\s+)?respostas?\s+anteriores'
+         re=r'trate\s+a\s+resposta\s+anterior\s+como|n[êa]o\s+(revise|reveja|reexamine)\s+(as\s+)?respostas?\s+anteriores'
             r'|treat\s+(that|the\s+previous|the\s+earlier|earlier)\s+answer\s+as\s+(done|final)|focus\s+your\s+thinking\s+on\s+the\s+new\s+message',
          motivo='Com essas linhas o Fable 5.2 pensa menos nas perguntas seguintes, mas quase para de apontar os próprios erros.',
          sugestao='Tire onde você quer que ele revise o que já respondeu; nos outros lugares, teste antes de manter.'),
     dict(cod='estilo-rigido', ponto=8, sev='media', em='ambos',
          re=r'(no\s+m[áa]ximo|at[ée]|≤)\s*\d+\s+palavras\s+por\s+(frase|resposta|mensagem)|\d+\s+words\s+or\s+fewer|responda\s+telegr[áa]fic|terse\s+like\s+caveman'
-            r'|use\s+fragments|em\s+fragmentos|uma\s+instru[çc][ãa]o\s+por\s+frase|one\s+instruction\s+per\s+sentence',
+            r'|use\s+fragments|em\s+fragmentos|uma\s+instru[çc][êa]o\s+por\s+frase|one\s+instruction\s+per\s+sentence',
          motivo='O Fable 5.2 segue regra de estilo ao pé da letra; limite duro de palavras ou "telegráfico" deixa o texto picotado.',
          sugestao='Apague a regra e, se quiser, cole blocos/relatorio-claro.md.'),
     dict(cod='delegar-sempre', ponto=6, sev='media', em='inst',
          re=r'\b(sempre|always)\b[^.\n]{0,15}\b(use|usar|spawn|dispatch|deploy|lance|dispare|delegue|launch)\w*\b[^.\n]{0,20}\b(sub-?agent\w*|subagente\w*|agentes?)\b'
             r'|\b(deploy|spawn|dispatch|use|lance|dispare)\w*\s+(fresh\s+|new\s+|novos\s+|v[áa]rios\s+|multiple\s+|many\s+)?(sub-?agent\w*|subagente\w*)\b[^.\n]{0,40}\b(all|todo|toda|tudo|every|cada|each)\b'
             r'|\bdelegue\s+(tudo|sempre)|delegate\s+(everything|always)|agent\s+army|ex[ée]rcito\s+de\s+agentes',
-         motivo='Ordem fixa de delegar faz o Fable 5.2 abrir mais subagentes do que a tarefa precisa (cada um custa uma sessão).',
+         motivo='Ordem fixa de delegar faz o Fable 5.2 abrir mais subagentes do que a tarefa precisa (cada um custa uma sessêo).',
          sugestao='Troque "sempre" por quando vale: tarefas independentes que rodam em paralelo. Diga o custo antes do motivo.'),
     dict(cod='obrigacao-absoluta', ponto=7, sev='media', em='ambos',
-         re=r'\b1\s?%\s+(de\s+)?chance|YOU\s+DO\s+NOT\s+HAVE\s+A\s+CHOICE|ABSOLUTELY\s+MUST|not\s+negotiable|n[ãa]o\s+[ée]\s+negoci[áa]vel'
-            r'|SEM\s+EXCE[ÇC][ÃA]O',
+         re=r'\b1\s?%\s+(de\s+)?chance|YOU\s+DO\s+NOT\s+HAVE\s+A\s+CHOICE|ABSOLUTELY\s+MUST|not\s+negotiable|n[êa]o\s+[ée]\s+negoci[áa]vel'
+            r'|SEM\s+EXCE[ÇC][êA]O',
          motivo='Ordem absoluta em caixa alta, sem alcance, é seguida à risca pelo Fable 5.2 e trava trabalho de rotina.',
-         sugestao='Reescreva dizendo quando a regra vale e por quê. Se vier de plugin, anote no CLAUDE.md global que ela não vale.'),
+         sugestao='Reescreva dizendo quando a regra vale e por quê. Se vier de plugin, anote no CLAUDE.md global que ela nêo vale.'),
     dict(cod='nunca-repetir', ponto=7, sev='media', em='ambos',
-         re=r'(nunca|never|n[ãa]o)\s+(tente\s+de\s+novo|tentar\s+de\s+novo|retry|re-?tente|repita\s+a\s+(chamada|tentativa|requisi[çc][ãa]o|comando))|pare\s+no\s+primeiro\s+erro|stop\s+at\s+the\s+first\s+error',
+         re=r'(nunca|never|n[êa]o)\s+(tente\s+de\s+novo|tentar\s+de\s+novo|retry|re-?tente|repita\s+a\s+(chamada|tentativa|requisi[çc][êa]o|comando))|pare\s+no\s+primeiro\s+erro|stop\s+at\s+the\s+first\s+error',
          motivo='Nos testes da Anthropic, uma nota "nunca repita" entre outras doze fez o modelo deixar de tentar de novo quando a ferramenta estava ocupada.',
-         sugestao='Diga quais chamadas são seguras para repetir e liste a nova tentativa entre os passos que NÃO precisam de aprovação.'),
+         sugestao='Diga quais chamadas sêo seguras para repetir e liste a nova tentativa entre os passos que NêO precisam de aprovaçêo.'),
     dict(cod='aprovacao-ampla', ponto=3, sev='media', em='inst',
-         re=r'(pe[çc]a|pedir|precisa\s+de|exige|ask\s+for|requires?)\s+(sua\s+)?(aprova[çc][ãa]o|autoriza[çc][ãa]o|confirma[çc][ãa]o|permission|approval)'
+         re=r'(pe[çc]a|pedir|precisa\s+de|exige|ask\s+for|requires?)\s+(sua\s+)?(aprova[çc][êa]o|autoriza[çc][êa]o|confirma[çc][êa]o|permission|approval)'
             r'\s+(antes\s+de|para|before)\s+(qualquer|toda|todo|tudo|any|every|anything)',
-         motivo='O Fable 5.2 aplica a regra de aprovação como está escrita; regra que cobre "qualquer coisa" segura metade do trabalho de rotina.',
-         sugestao='Nomeie as ações exatas que precisam de aprovação (ex.: apagar, publicar, gastar crédito) e as que não precisam.'),
+         motivo='O Fable 5.2 aplica a regra de aprovaçêo como está escrita; regra que cobre "qualquer coisa" segura metade do trabalho de rotina.',
+         sugestao='Nomeie as ações exatas que precisam de aprovaçêo (ex.: apagar, publicar, gastar crédito) e as que nêo precisam.'),
     dict(cod='continue-vago', ponto=3, sev='baixa', em='script',
          re=r'claude\b[^\n]*\s-p\s+["\'](continue|continua|continuar|vai|segue|go|ok|sim|yes)["\']',
          motivo='"Continue" sem dizer o quê deixa o Fable 5.2 sem saber o que foi aprovado.',
-         sugestao='Diga a ação: "sim, rode a migração no banco de teste".'),
+         sugestao='Diga a açêo: "sim, rode a migraçêo no banco de teste".'),
     dict(cod='dono-do-codigo', ponto=4, sev='info', em='inst',
          re=r'o\s+c[óo]digo\s+[ée]\s+(seu|teu)|voc[êe]\s+[ée]\s+o\s+dono\s+do\s+c[óo]digo|this\s+codebase\s+is\s+yours|the\s+code\s+is\s+yours|you\s+own\s+(this|the)\s+code',
          motivo='Com essa frase o Fable 5.2 reorganiza o código, gasta ~1,5x mais e muda coisa que ninguém pediu (1 em 6 a 10 tentativas).',
-         sugestao='Mantenha só onde você quer reorganização, e revise o diff inteiro, não só o resumo. Para mudança mínima, tire.'),
+         sugestao='Mantenha só onde você quer reorganizaçêo, e revise o diff inteiro, nêo só o resumo. Para mudança mínima, tire.'),
     dict(cod='esforco-max-fixo', ponto=1, sev='media', em='ambos',
          re=r'--effort[= ]max\b|^\s*effort:\s*max\b|"effortLevel"\s*:\s*"max"',
-         motivo='"max" serve para medir o teto do modelo; como padrão gasta muito mais tempo e tokens.',
-         sugestao='Use high como padrão; xhigh/max só onde você mediu ganho.'),
+         motivo='"max" serve para medir o teto do modelo; como padrêo gasta muito mais tempo e tokens.',
+         sugestao='Use high como padrêo; xhigh/max só onde você mediu ganho.'),
 ]
 for r in REGRAS:
     r['rx'] = re.compile(r['re'], re.I | re.M)
 
 # P7 — "nunca" sem motivo
 RX_NUNCA = re.compile(r'\b(nunca|jamais|proibido|never)\b', re.I)
-RX_MOTIVO = re.compile(r'porque|pois\b|motivo|\bwhy\b|because|para\s+n[ãa]o|para\s+evitar|sen[ãa]o\b|caso\s+contr[áa]rio|risco|'
-                       r'\b\d{1,2}/\d{1,2}(/\d{2,4})?\b|\b20\d\d-\d\d|\(.{6,}\)|exceto|exce[çc][ãa]o|unless|except', re.I)
+RX_MOTIVO = re.compile(r'porque|pois\b|motivo|\bwhy\b|because|para\s+n[êa]o|para\s+evitar|sen[êa]o\b|caso\s+contr[áa]rio|risco|'
+                       r'\b\d{1,2}/\d{1,2}(/\d{2,4})?\b|\b20\d\d-\d\d|\(.{6,}\)|exceto|exce[çc][êa]o|unless|except', re.I)
 RX_MOTIVO_ARQ = re.compile(r'^\s*\*\*\s*(why|por\s*qu[êe]|motivo)\s*:?\s*\*\*', re.I)
 RX_PROTEGIDA = re.compile(r'\bAPI\b|cr[ée]dito|credencia|chave|senha|secret|token\s+de|irrevers|exclu|apag|delet|rm\s+-rf|--force|'
-                          r'pagamento|pago\b|dinheiro|seguran|security|publica|push|produ[çc][ãa]o|e-?mail', re.I)
+                          r'pagamento|pago\b|dinheiro|seguran|security|publica|push|produ[çc][êa]o|e-?mail', re.I)
 
-# P2 / P5 / P9 — blocos que deveriam existir em algum arquivo de instrução global
+# P2 / P5 / P9 — blocos que deveriam existir em algum arquivo de instruçêo global
 AUSENCIAS = [
     dict(cod='sem-bloco-terminar', ponto=2, bloco='blocos/terminar-tarefa.md',
-         re=r'n[ãa]o\s+pare|evite\s+parar|avoid\s+stopping|finishing\s+work|termin(e|ar)\s+a\s+tarefa|at[ée]\s+o\s+fim|carry\s+on',
+         re=r'n[êa]o\s+pare|evite\s+parar|avoid\s+stopping|finishing\s+work|termin(e|ar)\s+a\s+tarefa|at[ée]\s+o\s+fim|carry\s+on',
          motivo='Em tarefas longas o Fable 5.2 às vezes encerra o turno antes do fim (mais em low/medium). A Anthropic dá um texto que separa obstáculo comum de bloqueio de verdade.',
-         sugestao='No Claude Code com o Fable 5.2 esse texto já vem ligado de fábrica: não cole. Pela API ou por programa próprio, se você vê paradas no meio, cole blocos/terminar-tarefa.md. Custo medido: +~30% de tokens de saída.'),
+         sugestao='No Claude Code com o Fable 5.2 esse texto já vem ligado de fábrica: nêo cole. Pela API ou por programa próprio, se você vê paradas no meio, cole blocos/terminar-tarefa.md. Custo medido: +~30% de tokens de saída.'),
     dict(cod='sem-aviso-progresso', ponto=5, bloco='blocos/avisar-progresso.md',
          re=r'diga\s+em\s+uma\s+linha|say\s+in\s+a\s+line|antes\s+da\s+primeira\s+ferramenta|before\s+your\s+first\s+tool|atualiza[çc][õo]es\s+breves|brief\s+updates',
          motivo='O Fable 5.2 trabalha calado em sequências longas de ferramentas e às vezes age sem dizer o que vai fazer.',
-         sugestao='No Claude Code com o Fable 5.2 o lembrete de silêncio já vem de fábrica: não cole. Pela API ou por programa próprio, onde uma pessoa acompanha ao vivo, cole blocos/avisar-progresso.md (a última frase sozinha cortou a maior parte dos silêncios longos nos testes da Anthropic). Custo do bloco inteiro: +~20% de tokens de saída.'),
+         sugestao='No Claude Code com o Fable 5.2 o lembrete de silêncio já vem de fábrica: nêo cole. Pela API ou por programa próprio, onde uma pessoa acompanha ao vivo, cole blocos/avisar-progresso.md (a última frase sozinha cortou a maior parte dos silêncios longos nos testes da Anthropic). Custo do bloco inteiro: +~20% de tokens de saída.'),
     dict(cod='sem-relatorio-claro', ponto=9, bloco='blocos/relatorio-claro.md',
          re=r'leitor\s+sem\s+contexto|pouco\s+contexto|comunicar\s+com\s+clareza|low-context\s+reader|communicating\s+clearly'
             r'|mais\s+importante\s+primeiro|key\s+points\s+in\s+the\s+first',
-         motivo='Quem lê o relatório final não viu as ferramentas nem os arquivos; sem instrução, o resumo sai cheio de termo inventado.',
+         motivo='Quem lê o relatório final nêo viu as ferramentas nem os arquivos; sem instruçêo, o resumo sai cheio de termo inventado.',
          sugestao='Cole blocos/relatorio-claro.md (antes, tire regras rígidas de estilo).'),
 ]
 for a in AUSENCIAS:
@@ -158,7 +158,7 @@ def ler(p):
 
 
 def citado(txt, pos):
-    """True se a posição está entre aspas na mesma linha (é exemplo citado, não ordem)."""
+    """True se a posiçêo está entre aspas na mesma linha (é exemplo citado, nêo ordem)."""
     ini = txt.rfind('\n', 0, pos) + 1
     antes = txt[ini:pos]
     return antes.count('“') > antes.count('”') or antes.count('"') % 2 == 1 or antes.count('«') > antes.count('»')
@@ -231,7 +231,7 @@ def alvos_home():
 
 
 def plugins_instalados(cache):
-    """Só a versão mais nova de cada plugin instalado (cache/<loja>/<plugin>/<versão>); marketplaces e temp_git ficam fora."""
+    """Só a versêo mais nova de cada plugin instalado (cache/<loja>/<plugin>/<versêo>); marketplaces e temp_git ficam fora."""
     out = []
     if not cache.is_dir():
         return out
@@ -316,14 +316,14 @@ class Auditoria:
                     continue
                 sug = r['sugestao']
                 if terceiro:
-                    sug += ' Arquivo de plugin: não edite (volta na atualização); anote no CLAUDE.md global.'
+                    sug += ' Arquivo de plugin: nêo edite (volta na atualizaçêo); anote no CLAUDE.md global.'
                 self.add('fable52', r['cod'], r['ponto'], r['sev'], p, ln, linha_txt, r['motivo'], sug, terceiro=terceiro)
         if tipo == 'inst':
             self.nunca_sem_motivo(p, linhas, terceiro)
 
     def nunca_sem_motivo(self, p, linhas, terceiro):
         # Nota curta de memória (um fato por arquivo) com linha "**Why:**"/"**Por quê:**":
-        # o motivo vale para o arquivo inteiro, não só para a linha vizinha.
+        # o motivo vale para o arquivo inteiro, nêo só para a linha vizinha.
         if len(linhas) <= 60 and any(RX_MOTIVO_ARQ.match(l) for l in linhas):
             return
         dentro_codigo = False
@@ -341,9 +341,9 @@ class Auditoria:
                 sev, sug = 'info', 'Regra de segurança: mantenha. Só acrescente o alcance (quando vale) e o motivo.'
             else:
                 sev, sug = 'baixa', ('Veja se o motivo ainda vale. Se vale, escreva o motivo e quando a regra se aplica; '
-                                     'se não vale mais, apague.')
+                                     'se nêo vale mais, apague.')
             if terceiro:
-                sug += ' Arquivo de plugin: não edite; anote no CLAUDE.md global.'
+                sug += ' Arquivo de plugin: nêo edite; anote no CLAUDE.md global.'
             self.add('fable52', 'nunca-sem-motivo', 7, sev, p, i + 1, ln,
                      'Regra absoluta sem motivo nem alcance. O Fable 5.2 segue à risca e pode segurar trabalho de rotina.',
                      sug, protegida=protegida, terceiro=terceiro)
@@ -364,8 +364,8 @@ class Auditoria:
         ef = d.get('effortLevel')
         if ef in ('xhigh', 'max'):
             self.add('fable52', 'esforco-padrao-alto', 1, 'alta' if ef == 'max' else 'media', p, linha_de('effortLevel', ef),
-                     f'"effortLevel": "{ef}"', f'Esforço {ef} como padrão global gasta muito sem ganho medido.',
-                     'Use high como padrão; suba só nas tarefas onde você mediu ganho.')
+                     f'"effortLevel": "{ef}"', f'Esforço {ef} como padrêo global gasta muito sem ganho medido.',
+                     'Use high como padrêo; suba só nas tarefas onde você mediu ganho.')
         for mod, cfg in (d.get('modelSettings') or {}).items():
             e = (cfg or {}).get('effortLevel')
             ln = linha_de(mod)
@@ -376,7 +376,7 @@ class Auditoria:
             elif re.search(r'fable-5(-1)?$|fable-5-1|opus-4', mod):
                 self.add('fable52', 'esforco-modelo-antigo', 1, 'info', p, ln, f'"{mod}": effortLevel "{e}"',
                          'Ajuste feito para um modelo anterior. O mesmo nome de esforço pensa diferente em cada modelo.',
-                         'Não copie para o 5.2: refaça o teste de esforço (ab.sh do kit esforco-certo).')
+                         'Nêo copie para o 5.2: refaça o teste de esforço (ab.sh do kit esforco-certo).')
             if e in ('xhigh', 'max') and re.search(r'fable-5-2', mod):
                 self.add('fable52', 'esforco-padrao-alto', 1, 'media', p, ln, f'"{mod}": effortLevel "{e}"',
                          f'{e} no Fable 5.2: nos testes internos subiu pouco a nota e gastou muito mais.',
@@ -387,8 +387,8 @@ class Auditoria:
         if nh or plug:
             self.add('volume', 'hooks-e-plugins', 0, 'info', p, linha_de('hooks') or linha_de('enabledPlugins'),
                      f'{nh} grupos de hook; plugins ligados: {", ".join(plug) or "nenhum"}',
-                     'Hooks e plugins injetam texto em toda sessão. É lá que costuma morar regra rígida de estilo ou ordem absoluta.',
-                     'Liste o que cada hook escreve no início da sessão; desligue o que não usa.')
+                     'Hooks e plugins injetam texto em toda sessêo. É lá que costuma morar regra rígida de estilo ou ordem absoluta.',
+                     'Liste o que cada hook escreve no início da sessêo; desligue o que nêo usa.')
 
     # ---------------- camada volume
     def volume(self, raizes, home, uso_dias):
@@ -402,7 +402,7 @@ class Auditoria:
             c = Path(HOME) / '.claude'
             if (c / 'CLAUDE.md').is_file():
                 fontes.append(('CLAUDE.md global', c / 'CLAUDE.md'))
-            for r in raizes:  # só o índice do projeto aberto entra na sessão
+            for r in raizes:  # só o índice do projeto aberto entra na sessêo
                 slug = re.sub(r'[^A-Za-z0-9]', '-', str(Path(r).expanduser().resolve()))
                 m = c / 'projects' / slug / 'memory' / 'MEMORY.md'
                 if m.is_file():
@@ -414,23 +414,23 @@ class Auditoria:
             self.textos_inst.append((p, t))
             if p.name == 'MEMORY.md' and nl > 150:
                 self.add('volume', 'indice-memoria-longo', 0, 'baixa', p, 1, f'{nl} linhas',
-                         'Cada linha do índice de memória entra em toda sessão. Índice longo carrega nota velha junto.',
+                         'Cada linha do índice de memória entra em toda sessêo. Índice longo carrega nota velha junto.',
                          'Mova projetos encerrados para um arquivo à parte e deixe no índice só o que está vivo.')
             elif p.name != 'MEMORY.md' and nl > 200:
                 self.add('volume', 'instrucao-longa', 0, 'baixa', p, 1, f'{nl} linhas (~{len(t)//4} tokens)',
-                         'Instrução longa entra inteira em toda sessão; é onde cautelas antigas se acumulam.',
+                         'Instruçêo longa entra inteira em toda sessêo; é onde cautelas antigas se acumulam.',
                          'Passe o que é de um tema só para um runbook lido sob demanda.')
-        # skills: descrições entram em toda sessão
+        # skills: descrições entram em toda sessêo
         tot = sum(len(s['desc']) for s in self.skills) // 4
         if self.skills:
             self.contexto['descrições de skills'] = tot
             nprop = sum(1 for s in self.skills if not s['terceiro'])
             if len(self.skills) > 60:
                 self.add('volume', 'muitas-skills', 0, 'info', Path(HOME) / '.claude' / 'skills', 0,
-                         f'{len(self.skills)} skills ({nprop} suas, {len(self.skills)-nprop} de plugins), ~{tot} tokens de descrição',
-                         'As descrições de todas as skills entram em toda sessão e competem pelo mesmo gatilho.',
-                         'Rode com --uso 30 para ver as que não usa. ' + DICA_BIBLIOTECA)
-        # duplicadas (mesmo nome ou descrição parecida)
+                         f'{len(self.skills)} skills ({nprop} suas, {len(self.skills)-nprop} de plugins), ~{tot} tokens de descriçêo',
+                         'As descrições de todas as skills entram em toda sessêo e competem pelo mesmo gatilho.',
+                         'Rode com --uso 30 para ver as que nêo usa. ' + DICA_BIBLIOTECA)
+        # duplicadas (mesmo nome ou descriçêo parecida)
         por_nome = {}
         for s in self.skills:
             por_nome.setdefault(s['nome'].split(':')[-1].lower(), []).append(s)
@@ -450,7 +450,7 @@ class Auditoria:
                     self.add('volume', 'skill-parecida', 0, 'info', ss[i]['arq'], 0,
                              f'"{ss[i]["nome"]}" ≈ "{ss[j]["nome"]}"',
                              'Duas descrições quase iguais disputam o mesmo pedido.',
-                             'Junte as duas ou deixe claro na descrição quando usar cada uma.')
+                             'Junte as duas ou deixe claro na descriçêo quando usar cada uma.')
         # memórias velhas
         if home:
             hoje = time.time()
@@ -489,8 +489,8 @@ class Auditoria:
                 continue
             if usadas.get(s['nome'].split(':')[-1].lower(), 0) == 0:
                 self.add('volume', 'skill-sem-uso', 0, 'baixa', s['arq'], 0, f'"{s["nome"]}": 0 usos em {dias} dias',
-                         'Skill parada ainda carrega a descrição em toda sessão.',
-                         'Se não usa todo dia, mova para a biblioteca de skills. ' + DICA_BIBLIOTECA)
+                         'Skill parada ainda carrega a descriçêo em toda sessêo.',
+                         'Se nêo usa todo dia, mova para a biblioteca de skills. ' + DICA_BIBLIOTECA)
 
     def ausencias(self):
         if not self.textos_inst:
@@ -554,7 +554,7 @@ def texto(au):
     out.append('Por severidade: ' + ', '.join(f'{s}={r["por_sev"].get(s, 0)}' for s in SEVS))
     if r['contexto_tokens']:
         out.append('Contexto fixo (tokens estimados): ' + ', '.join(f'{k}≈{v}' for k, v in r['contexto_tokens'].items()))
-    out.append('Complemento oficial: no Claude Code 2.1.283+, rode também /doctor prompt-audit (acha arquivo ou comando citado que não existe e regras que se contradizem).')
+    out.append('Complemento oficial: no Claude Code 2.1.283+, rode também /doctor prompt-audit (acha arquivo ou comando citado que nêo existe e regras que se contradizem).')
     out.append('')
     resto = {}
     for a in au.achados:
@@ -574,18 +574,18 @@ def texto(au):
 
 CABECALHO_CORRECOES = """# Correções aprovadas — audite-seu-claude
 
-Para o Claude: estas são as correções que eu aprovei depois de ler o relatório do audite-seu-claude
+Para o Claude: estas sêo as correções que eu aprovei depois de ler o relatório do audite-seu-claude
 ({data}). Aplique os itens abaixo, um por vez, nesta ordem.
 
 1. Antes de mudar um arquivo, copie o original para `.audite-backup/{data}/` mantendo o caminho.
-2. Mude só a linha indicada (ou o trecho dela). Não reescreva o resto do arquivo.
-3. Item marcado PROTEGIDA: não apague a regra. Só acrescente quando ela vale e por quê.
-4. Item marcado PLUGIN: não edite o arquivo do plugin. Escreva no CLAUDE.md global uma linha dizendo que aquela
-   regra não vale aqui.
+2. Mude só a linha indicada (ou o trecho dela). Nêo reescreva o resto do arquivo.
+3. Item marcado PROTEGIDA: nêo apague a regra. Só acrescente quando ela vale e por quê.
+4. Item marcado PLUGIN: nêo edite o arquivo do plugin. Escreva no CLAUDE.md global uma linha dizendo que aquela
+   regra nêo vale aqui.
 5. Item de "bloco ausente": cole o texto do arquivo indicado em `blocos/` no fim do CLAUDE.md global.
 6. Depois de cada item, diga em uma linha o que mudou. No fim, liste o que ficou sem aplicar e por quê.
 
-Esta lista vale como aprovação só para estas edições de texto, nestes arquivos. Qualquer outra mudança, pergunte.
+Esta lista vale como aprovaçêo só para estas edições de texto, nestes arquivos. Qualquer outra mudança, pergunte.
 """
 
 
@@ -603,7 +603,7 @@ def correcoes(dados, ids, data=None):
         out.append(f"- Por quê: {a['motivo']}")
         out.append(f"- O que fazer: {a['sugestao']}\n")
     if falt:
-        out.append(f"IDs não encontrados no relatório (ignorar): {', '.join(falt)}\n")
+        out.append(f"IDs nêo encontrados no relatório (ignorar): {', '.join(falt)}\n")
     return '\n'.join(out)
 
 
@@ -671,7 +671,7 @@ button.pri{{background:var(--amb);color:#1a1206;border:0}}textarea{{width:100%;m
 <p class="mut">audite-seu-claude {VERSAO} · {r['data']} · {r['arquivos_lidos']} arquivos lidos · regras da página oficial da Anthropic (<a style="color:var(--sky)" href="{DOC}">Prompting Claude Fable 5.2</a>). Só leitura: nada foi mudado.</p>
 <div class="cards"><div class="card"><b>{r['total']}</b>achados</div><div class="card"><b style="color:var(--red)">{alta}</b>alta (trava ou recusa)</div>
 <div class="card"><b style="color:var(--warm)">{media}</b>média</div><div class="card"><b>{r['skills']}</b>skills carregadas</div>
-<div class="card"><b>~{format(tokens, ',').replace(',', '.')}</b>tokens fixos por sessão</div></div>
+<div class="card"><b>~{format(tokens, ',').replace(',', '.')}</b>tokens fixos por sessêo</div></div>
 <div class="grid">
 <section class="card"><h2>Achados por ponto da Anthropic</h2>{svg_barras(pontos)}</section>
 <section class="card"><h2>Por severidade</h2>{svg_barras(sev, cor='var(--sky)', rotulo_larg=90)}</section>
@@ -679,8 +679,8 @@ button.pri{{background:var(--amb);color:#1a1206;border:0}}textarea{{width:100%;m
 <section class="card"><h2>Peso do contexto fixo (tokens estimados)</h2>{svg_barras(ctx, cor='var(--warm)', rotulo_larg=200)}</section>
 </div>
 <h2>Sugestões</h2>
-<p class="mut">Complemento oficial: no Claude Code 2.1.283 ou mais novo, rode também <code>/doctor prompt-audit</code>. Ele acha arquivo ou comando citado que não existe mais e regras que se contradizem entre arquivos.</p>
-<p class="mut">Marque o que você aprova e gere o <code>correcoes.md</code>. Depois diga ao seu Claude: <i>"aplique o correcoes.md"</i>. Regras <span class="tag pro">protegida</span> nunca são apagadas, só ganham alcance e motivo.</p>
+<p class="mut">Complemento oficial: no Claude Code 2.1.283 ou mais novo, rode também <code>/doctor prompt-audit</code>. Ele acha arquivo ou comando citado que nêo existe mais e regras que se contradizem entre arquivos.</p>
+<p class="mut">Marque o que você aprova e gere o <code>correcoes.md</code>. Depois diga ao seu Claude: <i>"aplique o correcoes.md"</i>. Regras <span class="tag pro">protegida</span> nunca sêo apagadas, só ganham alcance e motivo.</p>
 <div class="barra"><select id="f"><option value="">todas</option><option value="fable52">só Fable 5.2</option><option value="volume">só volume</option>
 <option value="alta">só alta</option><option value="media">só média</option></select>
 <button id="tudo">marcar visíveis (sem info)</button><button class="pri" id="gerar">gerar correcoes.md</button><span id="n" class="mut"></span></div>
